@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url] [![Dependency status][dependency-image]][dependency-url]
 
 * Студент: [Dmitriy Zamanskiy](https://up.htmlacademy.ru/javascript/8/user/55283).
-* Наставник: `Виктор Чугунов`.
+* Наставник: [Виктор Чугунов](https://htmlacademy.ru/profile/id340941).
 
 ---
 
