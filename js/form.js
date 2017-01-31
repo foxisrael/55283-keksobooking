@@ -1,19 +1,37 @@
 'use strict';
 
-//Переменные открытия окна
 var pins = document.querySelectorAll('.pin');
-var dialogs = document.querySelector('.dialog');
+var dialog = document.querySelector('.dialog');
+var dialogClose = dialog.querySelector('.dialog__close');
 
-pins.forEach(function(pin) {
-  pin.addEventListener('click', function() {
-    pin.classList.toggle('pin--active');
-  });
+(function initPinClicks() {
+  // Добавление класса каждому пину
+  for (var i = 0; i < pins.length; i++) {
+    pins[i].addEventListener('click', function (pin) {
+      return function () {
+        removeActivePin();
+        pin.classList.add('pin--active');
+        dialog.classList.remove('invisible');
+      };
+    }(pins[i])
+    );
+  }
+})();
+
+// Добавление события на крестик
+dialogClose.addEventListener('click', function () {
+  dialog.classList.add('invisible');
+  удаляем активный пин
+  removeActivePin();
 });
 
+function removeActivePin() {
+  for (var i = 0; i < pins.length; i++) {
+    pins[i].classList.remove('pin--active');
+  }
+}
 
-
-
-
+//Объявление переменных формы
 var price = document.querySelector('#price'); //Стоимость
 var time = document.querySelector('#time'); //Время заезда
 var timeout = document.querySelector('#timeout'); //Время выезда
@@ -41,8 +59,6 @@ price.addEventListener('change', function() {
     type.value = 'Дворец';
   }
 });
-
-
 
 roomNumber.addEventListener('change', function() {
   if (roomNumber.value >= '2') {
