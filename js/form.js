@@ -10,26 +10,44 @@ pins.forEach(function(pin) {
   });
 });
 
-//Переменные формы
-var title = document.querySelector('#title');
-var price = document.querySelector('#price');
-var address = document.querySelector('#address');
 
-//Валидация заголовка
-title.addEventListener('click', function() {
-  title.required = true;
-  title.minlenght >= 30;
-  title.maxlenght <= 100;
+
+
+
+var price = document.querySelector('#price'); //Стоимость
+var time = document.querySelector('#time'); //Время заезда
+var timeout = document.querySelector('#timeout'); //Время выезда
+var type = document.querySelector('#type'); //Тип жилья
+var roomNumber = document.querySelector('#room_number'); //Кол-во комнат
+var capacity = document.querySelector('#capacity'); //Кол-во мест
+
+// Синхронизация времени заезда и выезда
+syncTime(time, timeout);
+syncTime(timeout, time);
+
+function syncTime(select1, select2) {
+  select1.addEventListener('change', function() {
+    select2.value = select1.value;
+  });
+}
+
+// Изменение типа жилья от стоимости
+price.addEventListener('change', function() {
+  if (price.value < 1000) {
+    type.value = 'Лачуга';
+  } else if (price.value < 10000) {
+    type.value = 'Квартира';
+  } else {
+    type.value = 'Дворец';
+  }
 });
 
-//Валидация стоимости
-price.addEventListener('click', function() {
-  price.required = true;
-  price.minlenght >= 1000;
-  price.maxlenght <= 1000000;
-});
 
-//Валидация адреса
-address.addEventListener('click', function() {
-  address.required = true;
+
+roomNumber.addEventListener('change', function() {
+  if (roomNumber.value >= '2') {
+    capacity.value = 'для 3 гостей';
+  } else {
+    capacity.value = 'не для гостей';
+  }
 });
