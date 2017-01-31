@@ -1,12 +1,13 @@
 'use strict';
 
 //Переменные открытия окна
-var pin = document.querySelector('.pin');
-var dialog = document.querySelector('.dialog')
+var pins = document.querySelectorAll('.pin');
+var dialogs = document.querySelector('.dialog');
 
-pin.addEventListener('click', function() {
-  pin.classList.remove('pin--active')
-  pin.classList.remove('pin--active')
+pins.forEach(function(pin) {
+  pin.addEventListener('click', function() {
+    pin.classList.toggle('pin--active');
+  });
 });
 
 //Переменные формы
