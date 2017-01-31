@@ -21,7 +21,7 @@ var dialogClose = dialog.querySelector('.dialog__close');
 // Добавление события на крестик
 dialogClose.addEventListener('click', function () {
   dialog.classList.add('invisible');
-  удаляем активный пин
+  // Удаляем активный пин
   removeActivePin();
 });
 
@@ -31,7 +31,7 @@ function removeActivePin() {
   }
 }
 
-//Объявление переменных формы
+// Объявление переменных формы
 var price = document.querySelector('#price'); //Стоимость
 var time = document.querySelector('#time'); //Время заезда
 var timeout = document.querySelector('#timeout'); //Время выезда
