@@ -28,20 +28,19 @@ function removeActivePin() {
 // Объявление переменных формы
 var price = document.querySelector('#price'); //Стоимость
 var time = document.querySelector('#time'); //Время заезда
-var timeout = document.querySelector('#timeout'); //Время выезда
+var timeOut = document.querySelector('#timeout'); //Время выезда
 var type = document.querySelector('#type'); //Тип жилья
 var roomNumber = document.querySelector('#room_number'); //Кол-во комнат
 var capacity = document.querySelector('#capacity'); //Кол-во мест
 
 // Синхронизация времени заезда и выезда
-syncTime(time, timeout);
-syncTime(timeout, time);
+time.addEventListener('change', function() {
+  timeOut.value = time.value;
+});
 
-function syncTime(select1, select2) {
-  select1.addEventListener('change', function() {
-    select2.value = select1.value;
-  });
-}
+timeout.addEventListener('change', function() {
+  time.value = timeOut.value;
+});
 
 // Изменение типа жилья от стоимости
 price.addEventListener('change', function() {
