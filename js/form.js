@@ -4,22 +4,16 @@ var pins = document.querySelectorAll('.pin');
 var dialog = document.querySelector('.dialog');
 var dialogClose = dialog.querySelector('.dialog__close');
 
-(function initPinClicks() {
-  // Добавление класса каждому пину
-  for (var i = 0; i < pins.length; i++) {
-    pins[i].addEventListener('click', function (pin) {
-      return function () {
-        removeActivePin();
-        pin.classList.add('pin--active');
-        dialog.classList.remove('invisible');
-      };
-    }(pins[i])
-    );
-  }
-})();
+pins.forEach(function(pin) {
+  pin.addEventListener('click', function() {
+    removeActivePin();
+    pin.classList.add('pin--active');
+    dialog.classList.remove('invisible');
+  });
+});
 
 // Добавление события на крестик
-dialogClose.addEventListener('click', function () {
+dialogClose.addEventListener('click', function() {
   dialog.classList.add('invisible');
   // Удаляем активный пин
   removeActivePin();
@@ -60,10 +54,31 @@ price.addEventListener('change', function() {
   }
 });
 
+// Изменение стоимости от типа жилья
+type.addEventListener('change', function() {
+  if (type.value == 'Лачуга') {
+    price.value = 0;
+  } else if (type.value == 'Квартира') {
+    price.value = 1000;
+  } else if (type.value == 'Дворец') {
+    price.value = 10000;
+  }
+});
+
+// Изменение кол-во гостей от кол-во комнат
 roomNumber.addEventListener('change', function() {
-  if (roomNumber.value >= '2') {
-    capacity.value = 'для 3 гостей';
-  } else {
+  if (roomNumber.value == '1 комната') {
     capacity.value = 'не для гостей';
+  } else {
+    capacity.value = 'для 3 гостей';
+  }
+});
+
+// Изменение кол-во комнат от кол-во гостей
+capacity.addEventListener('change', function() {
+  if (capacity.value == 'не для гостей') {
+    roomNumber.value = '1 комната';
+  } else {
+    roomNumber.value = '2 комнаты';
   }
 });
