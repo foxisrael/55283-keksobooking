@@ -83,9 +83,9 @@ capacity.addEventListener('change', function() {
 });
 
 //Проверка правильности введенных данных
-var Title = noticeForm.querySelector('#title');
-var Price = noticeForm.querySelector('#price');
-var Address = noticeForm.querySelector('#address');
+var Title = document.querySelector('#title');
+var Price = document.querySelector('#price');
+var Address = document.querySelector('#address');
 
 Title.required = true;
 Title.minLength = 30;
