@@ -87,13 +87,13 @@ var Title = noticeForm.querySelector('#title');
 var Price = noticeForm.querySelector('#price');
 var Address = noticeForm.querySelector('#address');
 
-formTitle.required = true;
-formTitle.minLength = 30;
-formTitle.maxLength = 100;
+Title.required = true;
+Title.minLength = 30;
+Title.maxLength = 100;
 
-formPrice.required = true;
-formPrice.type = 'number';
-formPrice.min = 1000;
-formPrice.max = 1000000;
+Price.required = true;
+Price.type = 'number';
+Price.min = 1000;
+Price.max = 1000000;
 
-formAddress.required = true;
+Address.required = true;
