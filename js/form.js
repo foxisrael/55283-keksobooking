@@ -81,3 +81,19 @@ capacity.addEventListener('change', function() {
     roomNumber.value = '2 комнаты';
   }
 });
+
+// Проверка правильности введенных данных
+var Title = noticeForm.querySelector('#title');
+var Price = noticeForm.querySelector('#price');
+var Address = noticeForm.querySelector('#address');
+
+formTitle.required = true;
+formTitle.minLength = 30;
+formTitle.maxLength = 100;
+
+formPrice.required = true;
+formPrice.type = 'number';
+formPrice.min = 1000;
+formPrice.max = 1000000;
+
+formAddress.required = true;
