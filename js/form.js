@@ -43,7 +43,7 @@ timeout.addEventListener('change', function() {
 });
 
 // Изменение типа жилья от стоимости
-price.addEventListener('change', function() {
+ price.addEventListener('change', function() {
   if (price.value < 1000) {
     type.value = 'Лачуга';
   } else if (price.value < 10000) {
@@ -82,7 +82,7 @@ capacity.addEventListener('change', function() {
   }
 });
 
-// Проверка правильности введенных данных
+//Проверка правильности введенных данных
 var Title = noticeForm.querySelector('#title');
 var Price = noticeForm.querySelector('#price');
 var Address = noticeForm.querySelector('#address');
