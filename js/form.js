@@ -45,40 +45,40 @@ timeout.addEventListener('change', function() {
 // Изменение типа жилья от стоимости
  price.addEventListener('change', function() {
   if (price.value < 1000) {
-    type.value = 'Лачуга';
+    type.value = 0;
   } else if (price.value < 10000) {
-    type.value = 'Квартира';
+    type.value = 1000;
   } else {
-    type.value = 'Дворец';
+    type.value = 10000;
   }
 });
 
 // Изменение стоимости от типа жилья
 type.addEventListener('change', function() {
-  if (type.value == 'Лачуга') {
+  if (type.value == 0) {
     price.value = 0;
-  } else if (type.value == 'Квартира') {
+  } else if (type.value == 1000) {
     price.value = 1000;
-  } else if (type.value == 'Дворец') {
+  } else if (type.value == 10000) {
     price.value = 10000;
   }
 });
 
 // Изменение кол-во гостей от кол-во комнат
 roomNumber.addEventListener('change', function() {
-  if (roomNumber.value == '1 комната') {
-    capacity.value = 'не для гостей';
+  if (roomNumber.value > 1) {
+    capacity.value = 3;
   } else {
-    capacity.value = 'для 3 гостей';
+    capacity.value = 0;
   }
 });
 
 // Изменение кол-во комнат от кол-во гостей
 capacity.addEventListener('change', function() {
-  if (capacity.value == 'не для гостей') {
-    roomNumber.value = '1 комната';
+  if (capacity.value <= 0) {
+    roomNumber.value = 1;
   } else {
-    roomNumber.value = '2 комнаты';
+    roomNumber.value = 2;
   }
 });
 
