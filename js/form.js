@@ -3,20 +3,76 @@
 var pins = document.querySelectorAll('.pin');
 var dialog = document.querySelector('.dialog');
 var dialogClose = dialog.querySelector('.dialog__close');
+var map = document.querySelector('.tokyo__pin-map');
+var ENTER_KEY_CODE = 13;
+var ESC_KEY_CODE = 27;
 
-pins.forEach(function(pin) {
-  pin.addEventListener('click', function() {
-    removeActivePin();
-    pin.classList.add('pin--active');
-    dialog.classList.remove('invisible');
-  });
+//Добавление события на родителя
+map.addEventListener('click', function (evt) {
+  eventHandler(evt);
 });
 
-// Добавление события на крестик
-dialogClose.addEventListener('click', function() {
-  dialog.classList.add('invisible');
-  // Удаляем активный пин
+map.addEventListener('keydown', function (evt) {
+  if (isActivateEvent(evt)) {
+    eventHandler(evt);
+  }
+});
+
+// Делегирование
+function eventHandler(evt) {
+  var target = evt.target;
+  while (target !== map) {
+    if (target.classList.contains('pin')) {
+      activatePin(target);
+      return;
+    }
+    target = target.parentNode;
+  }
+}
+
+// Проверка на нажатие Enter
+function isActivateEvent(evt) {
+  return evt.keyCode === ENTER_KEY_CODE;
+}
+
+// Проверка на нажатие Esc
+function setupKeydownHandler(evt) {
+  if (evt.keyCode === ESC_KEY_CODE) {
+    removeActivePin();
+    hideDialog();
+  }
+}
+
+// Удаление у всех pin--active, показываем окно и добавляем к текущему pin--active
+function activatePin(activePin) {
   removeActivePin();
+  showDialog();
+  activePin.classList.add('pin--active');
+}
+
+// Проверка / Cкрыть окно
+function showDialog() {
+  dialog.classList.remove('invisible');
+  document.addEventListener('keydown', isEscEvent);
+}
+
+function hideDialog() {
+  dialog.classList.add('invisible');
+  document.removeEventListener('keydown', isEscEvent);
+}
+
+// Закрыть окно по клику
+dialogClose.addEventListener('click', function (evt) {
+  hideDialog();
+  removeActivePin();
+});
+
+// Закрыть окно по нажатию кнопки
+dialogClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ESC_KEY_CODE) {
+    hideDialog();
+    removeActivePin();
+  }
 });
 
 function removeActivePin() {
@@ -24,6 +80,14 @@ function removeActivePin() {
     pins[i].classList.remove('pin--active');
   }
 }
+
+// pins.forEach(function(pin) {
+//   pin.addEventListener('click', function() {
+//     removeActivePin();
+//     pin.classList.add('pin--active');
+//     dialog.classList.remove('invisible');
+//   });
+// });
 
 // Объявление переменных формы
 var price = document.querySelector('#price'); //Стоимость
