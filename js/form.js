@@ -13,7 +13,7 @@ map.addEventListener('click', function (evt) {
 });
 
 map.addEventListener('keydown', function (evt) {
-  if (isActivateEvent(evt)) {
+  if (isEnterEvent(evt)) {
     eventHandler(evt);
   }
 });
@@ -31,12 +31,12 @@ function eventHandler(evt) {
 }
 
 // Проверка на нажатие Enter
-function isActivateEvent(evt) {
+function isEnterEvent(evt) {
   return evt.keyCode === ENTER_KEY_CODE;
 }
 
 // Проверка на нажатие Esc
-function setupKeydownHandler(evt) {
+function isEscEvent(evt) {
   if (evt.keyCode === ESC_KEY_CODE) {
     removeActivePin();
     hideDialog();
@@ -80,14 +80,6 @@ function removeActivePin() {
     pins[i].classList.remove('pin--active');
   }
 }
-
-// pins.forEach(function(pin) {
-//   pin.addEventListener('click', function() {
-//     removeActivePin();
-//     pin.classList.add('pin--active');
-//     dialog.classList.remove('invisible');
-//   });
-// });
 
 // Объявление переменных формы
 var price = document.querySelector('#price'); //Стоимость
