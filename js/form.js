@@ -18,11 +18,13 @@ var ESC_KEY_CODE = 27;
 
 map.addEventListener('click', function (evt) {
   eventHandler(evt);
+  togglePressed();
 });
 
 map.addEventListener('keydown', function (evt) {
   if (isEnterEvent(evt)) {
     eventHandler(evt);
+    togglePressed();
   }
 });
 
@@ -51,6 +53,8 @@ function isEscEvent(evt) {
 function activatePin(activePin) {
   removeActivePin();
   showDialog();
+  var pressed = (activePin.getAttribute('aria-pressed') === 'true');
+  activePin.setAttribute('aria-pressed', !pressed);
   activePin.classList.add('pin--active');
 }
 
