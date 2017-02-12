@@ -34,8 +34,8 @@ window.setValidationRules(title, titleValidation);
 window.setValidationRules(price, priceValidation);
 window.setValidationRules(address, addressValidation);
 
-window.synchronizeFields(time, timeout, timeValues, timeValues, 'value');
-window.synchronizeFields(timeout, time, timeValues, timeValues, 'value');
+window.synchronizeFields(time, timeOut, timeValues, timeValues, 'value');
+window.synchronizeFields(timeOut, time, timeValues, timeValues, 'value');
 
 window.synchronizeFields(roomNumber, capacity, roomNumberValues, capacityValues, 'value');
 window.synchronizeFields(capacity, roomNumber, capacityValues, roomNumberValues, 'value');

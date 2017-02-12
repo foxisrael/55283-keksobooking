@@ -9,13 +9,11 @@ var ESC_KEY_CODE = 27;
 
 map.addEventListener('click', function (evt) {
   eventHandler(evt);
-  togglePressed();
 });
 
 map.addEventListener('keydown', function (evt) {
   if (isEnterEvent(evt)) {
     eventHandler(evt);
-    togglePressed();
   }
 });
 
