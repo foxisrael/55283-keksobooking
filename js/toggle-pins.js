@@ -4,8 +4,8 @@ window.togglePins = (function () {
   var pins = document.querySelectorAll('.pin');
   var dialog = document.querySelector('.dialog');
 
-  var DIALOG_VISIBILITY_CLASS_NAME = 'invisible';
   var ACTIVE_PIN_CLASS_NAME = 'pin--active';
+  var DIALOG_VISIBILITY_CLASS_NAME = 'invisible';
 
   function deactivatePinByEsc(evt) {
     if (window.utils.isEscKeyCode(evt)) {
