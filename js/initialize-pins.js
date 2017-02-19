@@ -5,8 +5,8 @@ window.initializePins = (function () {
   var dialogClose = document.querySelector('.dialog__close');
   var pins = document.querySelectorAll('.pin');
   var dialog = document.querySelector('.dialog');
-  var ACTIVE_PIN_CLASS_NAME = 'pin--active';
-  var DIALOG_VISIBILITY_CLASS_NAME = 'invisible';
+  var PIN_ACTIVE_CLASS_NAME = 'pin--active';
+  var DIALOG_CLASS_NAME = 'invisible';
 
   function activatePin(evt, parent, onCardClose) {
     var target = evt.target;
@@ -14,8 +14,8 @@ window.initializePins = (function () {
     while (target !== parent) {
       if (target.classList.contains('pin')) {
         removeActivePin();
-        window.showCard(dialog, DIALOG_VISIBILITY_CLASS_NAME, deactivatePinByEsc);
-        target.classList.add(ACTIVE_PIN_CLASS_NAME);
+        window.showCard(dialog, DIALOG_CLASS_NAME, deactivatePinByEsc);
+        target.classList.add(PIN_ACTIVE_CLASS_NAME);
         target.blur();
         if (typeof onCardClose === 'function') {
           onCardClose(target);
@@ -26,26 +26,26 @@ window.initializePins = (function () {
     }
   }
 
-  function deactivatePin() {
-    removeActivePin();
-    hideDialog();
-  }
-
   function removeActivePin() {
     for (var i = 0; i < pins.length; i++) {
-      pins[i].classList.remove(ACTIVE_PIN_CLASS_NAME);
+      pins[i].classList.remove(PIN_ACTIVE_CLASS_NAME);
     }
   }
 
-  function hideDialog() {
-    dialog.classList.add(DIALOG_VISIBILITY_CLASS_NAME);
-    document.removeEventListener('keydown', deactivatePinByEsc);
+  function deactivatePin() {
+    removeActivePin();
+    hideDialog();
   }
 
   function deactivatePinByEsc(evt) {
     if (window.utils.isEscKeyCode(evt)) {
       deactivatePin();
     }
+  }
+
+  function hideDialog() {
+    dialog.classList.add(DIALOG_CLASS_NAME);
+    document.removeEventListener('keydown', deactivatePinByEsc);
   }
 
   function focusOpenButton(element) {

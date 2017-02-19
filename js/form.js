@@ -3,18 +3,12 @@
 window.initializeForm = (function () {
   var price = document.querySelector('#price');
   var time = document.querySelector('#time');
-  var timeout = document.querySelector('#timeout');
+  var address = document.querySelector('#address');
   var type = document.querySelector('#type');
+  var timeout = document.querySelector('#timeout');
+  var title = document.querySelector('#title');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
-  var title = document.querySelector('#title');
-  var address = document.querySelector('#address');
-
-  var timeValues = ['12', '13', '14'];
-  var minPriceValues = ['0', '1000', '10000'];
-  var typeValues = ['Лачуга', 'Квартира', 'Дворец'];
-  var roomNumberValues = ['1', '2', '100'];
-  var capacityValues = ['не для гостей', '3', '3'];
 
   var titleValidation = {
     required: true,
@@ -32,13 +26,12 @@ window.initializeForm = (function () {
     required: true
   };
 
+  window.synchronizeFields(time, timeout, ['12', '13', '14'], ['12', '13', '14'], 'value');
+  window.synchronizeFields(timeout, time, ['12', '13', '14'], ['12', '13', '14'], 'value');
+  window.synchronizeFields(roomNumber, capacity, ['1', '2', '100'], ['не для гостей', '3', '3'], 'value');
+  window.synchronizeFields(capacity, roomNumber, ['не для гостей', '3', '3'], ['1', '2', '100'], 'value');
+  window.synchronizeFields(type, price, ['Лачуга', 'Квартира', 'Дворец'], ['0', '1000', '10000'], 'min');
   window.setValidationRules(title, titleValidation);
   window.setValidationRules(price, priceValidation);
   window.setValidationRules(address, addressValidation);
-  window.synchronizeFields(time, timeout, timeValues, timeValues, 'value');
-  window.synchronizeFields(timeout, time, timeValues, timeValues, 'value');
-  window.synchronizeFields(roomNumber, capacity, roomNumberValues, capacityValues, 'value');
-  window.synchronizeFields(capacity, roomNumber, capacityValues, roomNumberValues, 'value');
-  window.synchronizeFields(type, price, typeValues, minPriceValues, 'min');
-
 })();
