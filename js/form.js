@@ -16,17 +16,25 @@ window.initializeForm = (function () {
   var roomNumberValues = ['1', '2', '100'];
   var capacityValues = ['не для гостей', '3', '3'];
 
-  title.required = true;
-  title.minLength = 30;
-  title.maxLength = 100;
+  var titleValidation = {
+    required: true,
+    minLength: 30,
+    maxLength: 100
+  };
 
-  price.required = true;
-  price.type = 'number';
-  price.min = 1000;
-  price.max = 1000000;
+  var priceValidation = {
+    required: true,
+    min: 1000,
+    max: 1000000
+  };
 
-  address.required = true;
+  var addressValidation = {
+    required: true
+  };
 
+  window.setValidationRules(title, titleValidation);
+  window.setValidationRules(price, priceValidation);
+  window.setValidationRules(address, addressValidation);
   window.synchronizeFields(time, timeout, timeValues, timeValues, 'value');
   window.synchronizeFields(timeout, time, timeValues, timeValues, 'value');
   window.synchronizeFields(roomNumber, capacity, roomNumberValues, capacityValues, 'value');
