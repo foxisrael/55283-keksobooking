@@ -5,36 +5,33 @@ window.initializePins = (function () {
   var dialogClose = document.querySelector('.dialog__close');
   var pins = document.querySelectorAll('.pin');
   var dialog = document.querySelector('.dialog');
-  var PIN_ACTIVE_CLASS_NAME = 'pin--active';
-  var DIALOG_CLASS_NAME = 'invisible';
+  var ACTIVEPIN_CLASS_NAME = 'pin--active';
+  var noop = function () {};
 
   function activatePin(evt, parent, onCardClose) {
     var target = evt.target;
-
     while (target !== parent) {
       if (target.classList.contains('pin')) {
         removeActivePin();
-        window.showCard(dialog, DIALOG_CLASS_NAME, deactivatePinByEsc);
-        target.classList.add(PIN_ACTIVE_CLASS_NAME);
+        window.showCard.show(dialog, deactivatePinByEsc);
+        target.classList.add(ACTIVEPIN_CLASS_NAME);
         target.blur();
-        if (typeof onCardClose === 'function') {
-          onCardClose(target);
-        }
+        onCardClose(target);
         return;
       }
       target = target.parentNode;
     }
   }
 
-  function removeActivePin() {
-    for (var i = 0; i < pins.length; i++) {
-      pins[i].classList.remove(PIN_ACTIVE_CLASS_NAME);
-    }
-  }
-
   function deactivatePin() {
     removeActivePin();
-    hideDialog();
+    window.showCard.hide(dialog, deactivatePinByEsc);
+  }
+
+  function removeActivePin() {
+    for (var i = 0; i < pins.length; i++) {
+      pins[i].classList.remove(ACTIVEPIN_CLASS_NAME);
+    }
   }
 
   function deactivatePinByEsc(evt) {
@@ -43,17 +40,12 @@ window.initializePins = (function () {
     }
   }
 
-  function hideDialog() {
-    dialog.classList.add(DIALOG_CLASS_NAME);
-    document.removeEventListener('keydown', deactivatePinByEsc);
-  }
-
   function focusOpenButton(element) {
     element.focus();
   }
 
   map.addEventListener('click', function (evt) {
-    activatePin(evt, map);
+    activatePin(evt, map, noop);
   });
 
   map.addEventListener('keydown', function (evt) {
